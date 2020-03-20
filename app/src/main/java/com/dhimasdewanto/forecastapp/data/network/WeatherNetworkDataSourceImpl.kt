@@ -17,7 +17,6 @@ class WeatherNetworkDataSourceImpl(
         try {
             val fetchCurrentWeather = weatherApiService
                 .getCurrentWeather(location, units)
-                .await()
             _downloadedCurrentWeather.postValue(fetchCurrentWeather)
         } catch (e: NoConnectivityException) {
             Log.e("Connectivity", "No Internet Connection.", e)
