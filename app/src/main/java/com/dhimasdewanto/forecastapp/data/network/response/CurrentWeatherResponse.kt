@@ -1,4 +1,4 @@
-package com.dhimasdewanto.forecastapp.data.network_response
+package com.dhimasdewanto.forecastapp.data.network.response
 
 import com.dhimasdewanto.forecastapp.data.db.entity.CurrentWeatherEntry
 import com.dhimasdewanto.forecastapp.data.db.entity.Location
