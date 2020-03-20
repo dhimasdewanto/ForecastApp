@@ -1,13 +1,12 @@
 package com.dhimasdewanto.forecastapp.data
 
-import com.dhimasdewanto.forecastapp.data.response.CurrentWeatherResponse
+import com.dhimasdewanto.forecastapp.data.network_response.CurrentWeatherResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Query
 

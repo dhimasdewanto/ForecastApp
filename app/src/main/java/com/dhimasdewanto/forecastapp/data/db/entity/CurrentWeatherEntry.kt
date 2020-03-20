@@ -1,8 +1,13 @@
-package com.dhimasdewanto.forecastapp.data.response
+package com.dhimasdewanto.forecastapp.data.db.entity
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+const val CURRENT_WEATHER_ID = 0
+
+@Entity(tableName = "current_weather")
 data class CurrentWeatherEntry(
     val cloudcover: Int,
     val feelslike: Int,
@@ -29,4 +34,8 @@ data class CurrentWeatherEntry(
     val windDir: String,
     @SerializedName("wind_speed")
     val windSpeed: Int
-)
+) {
+    // It can only one current weather.
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = CURRENT_WEATHER_ID
+}
