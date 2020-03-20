@@ -18,7 +18,8 @@ const val BASE_URL = "http://api.weatherstack.com/"
 interface WeatherApiService {
     @GET("current")
     fun getCurrentWeather(
-        @Query("query") location: String
+        @Query("query") location: String,
+        @Query("units") units: Char
     ): Deferred<CurrentWeatherResponse>
 
     companion object {

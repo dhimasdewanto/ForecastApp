@@ -9,10 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.dhimasdewanto.forecastapp.R
-import com.dhimasdewanto.forecastapp.data.network.ConnectivityInterceptorImpl
-import com.dhimasdewanto.forecastapp.data.network.WeatherApiService
-import com.dhimasdewanto.forecastapp.data.network.WeatherNetworkDataSource
-import com.dhimasdewanto.forecastapp.data.network.WeatherNetworkDataSourceImpl
+import com.dhimasdewanto.forecastapp.data.network.*
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -47,7 +44,7 @@ class CurrentWeatherFragment : Fragment() {
         })
 
         GlobalScope.launch(Dispatchers.Main) {
-            weatherNetworkDataSource.fetchCurrentWeather("London")
+            weatherNetworkDataSource.fetchCurrentWeather("London", WeatherApiUnits.METRIC.units)
         }
     }
 
