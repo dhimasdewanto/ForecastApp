@@ -27,6 +27,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
 }
 
 dependencies {
@@ -89,6 +92,9 @@ dependencies {
 
     // Material Design
     implementation 'com.google.android.material:material:1.1.0'
+
+    // Better DateTime support (even for older Android)
+    implementation "com.jakewharton.threetenabp:threetenabp:1.2.2"
 
     testImplementation 'junit:junit:4.12'
 
