@@ -3,6 +3,8 @@ package com.dhimasdewanto.forecastapp
 import android.app.Application
 import com.dhimasdewanto.forecastapp.data.db.ForecastDatabase
 import com.dhimasdewanto.forecastapp.data.network.*
+import com.dhimasdewanto.forecastapp.data.provider.UnitProvider
+import com.dhimasdewanto.forecastapp.data.provider.UnitProviderImpl
 import com.dhimasdewanto.forecastapp.data.repositories.ForecastRepository
 import com.dhimasdewanto.forecastapp.data.repositories.ForecastRepositoryImpl
 import com.dhimasdewanto.forecastapp.ui.weather.current.CurrentWeatherViewModelFactory
@@ -25,7 +27,8 @@ class ForecastApplication : Application(), KodeinAware {
         bind() from singleton { WeatherApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
         bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
-        bind() from provider {CurrentWeatherViewModelFactory(instance())}
+        bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
+        bind() from provider {CurrentWeatherViewModelFactory(instance(), instance())}
     }
 
     override fun onCreate() {

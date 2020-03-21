@@ -41,6 +41,7 @@ dependencies {
     def kodein_version = '6.5.0'
     def glide_version = '4.11.0'
     def groupie_version = '2.7.0'
+    def preference_version = '1.1.0'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -95,6 +96,9 @@ dependencies {
 
     // Better DateTime support (even for older Android)
     implementation "com.jakewharton.threetenabp:threetenabp:1.2.2"
+
+    // Preference with AndroidX
+    implementation "androidx.preference:preference:$preference_version"
 
     testImplementation 'junit:junit:4.12'
 
