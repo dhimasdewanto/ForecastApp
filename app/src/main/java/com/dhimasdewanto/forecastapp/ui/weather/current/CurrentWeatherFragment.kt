@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.dhimasdewanto.forecastapp.R
 import com.dhimasdewanto.forecastapp.data.network.*
 import com.dhimasdewanto.forecastapp.internal.UnitSystems
+import com.dhimasdewanto.forecastapp.internal.glide.GlideApp
 import com.dhimasdewanto.forecastapp.ui.base.ScopeFragment
 import kotlinx.android.synthetic.main.current_weather_fragment.*
 import kotlinx.coroutines.Dispatchers
@@ -46,8 +48,35 @@ class CurrentWeatherFragment : ScopeFragment(), KodeinAware {
         val currentWeather = viewModel.weather.await()
         currentWeather.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            current_text_view.text = it.toString()
+
+            group_loading.visibility = View.GONE
+            updateLocation("New York")
+            updateDateToToday()
+            updateTemperature(it.temperature, it.feelslike)
+            updateCondition(it.weatherDescriptions[0])
+
+            GlideApp.with(this@CurrentWeatherFragment)
+                .load(it.weatherIcons[0])
+                .into(image_weather)
         })
+    }
+
+    private fun updateTemperature(temperature: Int, feelsLike: Int) {
+        val unitAbbreviation = if (viewModel.isMetric) "C" else "F"
+        text_view_temp.text = "$temperature°$unitAbbreviation"
+        text_view_feels.text = "Feels like $feelsLike°$unitAbbreviation"
+    }
+
+    private fun updateCondition(condition: String) {
+        text_view_condition.text = condition
+    }
+
+    private fun updateLocation(location: String) {
+        (activity as? AppCompatActivity)?.supportActionBar?.title = location
+    }
+
+    private fun updateDateToToday() {
+        (activity as? AppCompatActivity)?.supportActionBar?.subtitle = "Today"
     }
 
 }
