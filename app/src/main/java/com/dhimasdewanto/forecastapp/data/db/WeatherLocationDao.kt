@@ -1,0 +1,18 @@
+package com.dhimasdewanto.forecastapp.data.db
+
+import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.dhimasdewanto.forecastapp.data.db.entity.WEATHER_LOCATION_ID
+import com.dhimasdewanto.forecastapp.data.db.entity.WeatherLocation
+
+@Dao
+interface WeatherLocationDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE) // Because only one weather entry
+    fun upsert(weatherLocation: WeatherLocation)
+
+    @Query("SELECT * FROM weather_location WHERE id = $WEATHER_LOCATION_ID")
+    fun getLocation(): LiveData<WeatherLocation>
+}

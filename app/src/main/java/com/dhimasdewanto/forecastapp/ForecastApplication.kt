@@ -3,6 +3,8 @@ package com.dhimasdewanto.forecastapp
 import android.app.Application
 import com.dhimasdewanto.forecastapp.data.db.ForecastDatabase
 import com.dhimasdewanto.forecastapp.data.network.*
+import com.dhimasdewanto.forecastapp.data.provider.LocationProvider
+import com.dhimasdewanto.forecastapp.data.provider.LocationProviderImpl
 import com.dhimasdewanto.forecastapp.data.provider.UnitProvider
 import com.dhimasdewanto.forecastapp.data.provider.UnitProviderImpl
 import com.dhimasdewanto.forecastapp.data.repositories.ForecastRepository
@@ -23,10 +25,12 @@ class ForecastApplication : Application(), KodeinAware {
 
         bind() from singleton { ForecastDatabase(instance()) }
         bind() from singleton { instance<ForecastDatabase>().currentWeatherDao() }
+        bind() from singleton { instance<ForecastDatabase>().weatherLocationDao() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { WeatherApiService(instance()) }
         bind<WeatherNetworkDataSource>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
-        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance()) }
+        bind<LocationProvider>() with singleton { LocationProviderImpl() }
+        bind<ForecastRepository>() with singleton { ForecastRepositoryImpl(instance(), instance(), instance(), instance()) }
         bind<UnitProvider>() with singleton { UnitProviderImpl(instance()) }
         bind() from provider {CurrentWeatherViewModelFactory(instance(), instance())}
     }
