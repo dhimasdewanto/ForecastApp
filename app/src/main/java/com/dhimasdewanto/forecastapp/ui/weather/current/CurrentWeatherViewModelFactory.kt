@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dhimasdewanto.forecastapp.data.provider.UnitProvider
 import com.dhimasdewanto.forecastapp.data.repositories.ForecastRepository
 
+@Suppress("UNCHECKED_CAST")
 class CurrentWeatherViewModelFactory(
     private val forecastRepository: ForecastRepository,
     private val unitProvider: UnitProvider
