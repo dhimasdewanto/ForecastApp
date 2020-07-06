@@ -1,5 +1,6 @@
 package com.dhimasdewanto.forecastapp.ui
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -23,6 +24,7 @@ class LifecycleBoundLocationManager(
         priority = LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
     }
 
+    @SuppressLint("MissingPermission")
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun startLocationUpdates() {
         fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, null)

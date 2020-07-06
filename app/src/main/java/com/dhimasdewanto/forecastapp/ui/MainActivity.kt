@@ -27,7 +27,7 @@ private const val MY_PERMISSION_ACCESS_COARSE_LOCATION = 1
 class MainActivity : AppCompatActivity(), KodeinAware {
     override val kodein: Kodein by closestKodein()
 
-    private val fusedLocationProviderClient: FusedLocationProviderClient by instance()
+    private val fusedLocationProviderClient by instance<FusedLocationProviderClient>()
 
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(result: LocationResult?) {
